@@ -18,6 +18,7 @@ let fred = Giant()
 ```
 
 Will these three lines of code run? If not, why not?
+```No these three lines of code will not run because "let" is a constant that cannot be changed```
 
 ```swift
 fred.name = "Brick"
@@ -26,7 +27,18 @@ fred.homePlanet = "Mars"
 ```
 
 Fix the class definition for `Giant` in the space below so that it **does** work:
+```
+class Giant {
+    var name: String = "Brick"
+    var weight: Double = 999.2
+    var homePlanet: String = "Mars"
+}
 
+var fred = Giant()
+print(fred.name)
+print(fred.weight)
+print(fred.homePlanet)
+```
 
 ## Question 2
 
@@ -42,6 +54,7 @@ let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 ```
 
 Will these three lines of code run? If so, why not?
+``` No these three lines of code will not run because "let" is a constant that cannot be changed ```
 
 ```swift
 bilbo.name = "Jake"
@@ -50,7 +63,7 @@ bilbo.homePlanet = "Saturn"
 ```
 
 Change the declaration of `bilbo` so that the above three lines of code **do** work:
-
+``` var bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")```
 
 ## Question 3
 
@@ -64,11 +77,11 @@ jason.name = "Jason"
 ```
 
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
-
+``` The value of edgar.name will be edgar. The value of jason.name will be Jason. This is because we are dealing with a class as opposed to a structure and any changes to a class with ultimately change the value of the code```
 
 ## Question 4
 
-Given this bit of code that uses the `Alien` struct:
+Given this bit of code that uses the `Alien` struct: 
 
 ```swift
 var charles = Alien(name: "Charles", height: 2.25, homePlanet: "Pluto")
@@ -77,7 +90,7 @@ charlesFromJupiter.homePlanet = "Jupiter"
 ```
 
 What will the value of `charles.homePlanet` be after the above code run? What about the value of `charlesFromJupiter.homePlanet`? Why?
-
+``` The value of charles.homePlanet will be Pluto and the value of charlesFromJupiter.homePlanet will be Jupiter because we are dealing with a struct/value type so the properties won't change``` 
 
 ## Question 5
 
@@ -99,9 +112,23 @@ struct BankAccount {
 ```
 
 Does this code work? Why or why not?
+```This code does not work because it is not mutable. It needs a mutating function"```"
 
 Fix the `BankAccount` struct so it does work.
+```
+struct BankAccount {
+    var owner: String
+    var balance: Double
 
+    mutating func deposit(_ amount: Double) {
+        balance += amount
+    }
+
+    mutating func withdraw(_ amount: Double) {
+        balance -= amount
+    }
+}
+```
 Given the code below (which should incorporate any fixes you made):
 
 ```swift
@@ -112,11 +139,20 @@ joeAccount.withdraw(50.0)
 
 What will the value of `joeAccount.balance` be after the above code runs? What about the value of `joeOtherAccount.balance`? Why?
 
+``` The value of joeAccount.balance would be $50 and the value of joeOtherAccount.balance would be $100 because setting joeOtherAccount = joeAccount means the var joeOtherAccount will access the information in joeAccount, but specific changes to joeAccount will not affect joeOtherAccount"```"
+
 
 ## Question 6
 
 a. Write a struct called `Person` that has 3 properties of type `String`: a first name, a last name and a middle name. Have the middle name be optional. Create 2 instances of a `Person`, one with a middle name and one without. Print one of their first names.
+```
+struct Person {
+var firstName : String
+var middleName : String?
+var lastName : String
+}
 
+```
 
 b. Write a method in `Person` called `fullName` that will return a formatted string of an instance's full name. Call this method on both the instances you created in part a.
 
@@ -234,7 +270,28 @@ let colorDictArray: [[String: Double]] = [["red": 1.0, "green": 0.0, "blue": 0.0
  ["red": 0.2, "green": 0.2, "blue": 0.5],
  ["red": 0.5, "green": 0.1, "blue": 0.9],]
 ```
+```
+struct RGBColor {
+var red : Double
+var green : Double
+var blue : Double
+}
+let colorDictArray: [[String: Double]] = [["red": 1.0, "green": 0.0, "blue": 0.0],
+["red": 0.0, "green": 1.0, "blue": 0.0],
+["red": 0.0, "green": 0.0, "blue": 1.0],
+["red": 0.6, "green": 0.9, "blue": 0.0],
+["red": 0.2, "green": 0.2, "blue": 0.5],
+["red": 0.5, "green": 0.1, "blue": 0.9],]
 
+var rgbArray = [RGBColor]()
+for dict in colorDictArray {
+rgbArray.append(RGBColor(red: dict["red"]!, green: dict['green"]!, blue : dict["blue"]!))
+
+}
+
+
+print(rgbArray)
+```
 
 ## Question 11
 
